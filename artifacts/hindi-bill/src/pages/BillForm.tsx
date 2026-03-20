@@ -669,10 +669,12 @@ export default function BillForm() {
                   <label className={labelCls}>8. प्रारंभ तिथि / Date of Commencement</label>
                   <input className={inputCls} value={form.dateOfCommencement} onChange={setDate("dateOfCommencement")} placeholder="DDMMYYYY" maxLength={10} />
                 </div>
+                {isFinal && (
                 <div>
                   <label className={labelCls}>9. पूर्णता तिथि (निर्धारित) / Date of Completion</label>
                   <input className={inputCls} value={form.dateOfCompletion} onChange={setDate("dateOfCompletion")} placeholder="DDMMYYYY" maxLength={10} />
                 </div>
+                )}
                 <div>
                   <label className={labelCls}>10. वास्तविक पूर्णता तिथि / Actual Completion Date</label>
                   <input className={inputCls} value={form.actualDateOfCompletion} onChange={setDate("actualDateOfCompletion")} placeholder="DDMMYYYY" maxLength={10} />
@@ -692,10 +694,6 @@ export default function BillForm() {
                 <div>
                   <label className={labelCls}>15. माप तिथि / Date of Measurement</label>
                   <input className={inputCls} value={form.dateOfMeasurement} onChange={setDate("dateOfMeasurement")} placeholder="DDMMYYYY" maxLength={10} />
-                </div>
-                <div>
-                  <label className={labelCls} style={{ color: "#666" }}>16. AEN जाँच तिथि / AEN Checking Date <span className="italic">(= माप तिथि / auto)</span></label>
-                  <input className={inputCls} value={formatDDMMYYYY(checkingDateAEN)} readOnly style={{ background: "#f5f5f5", color: "#888" }} />
                 </div>
               </div>
               {isFinal && lateSubmission && (
