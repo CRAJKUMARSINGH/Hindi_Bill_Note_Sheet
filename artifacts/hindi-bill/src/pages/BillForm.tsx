@@ -59,11 +59,11 @@ function todayDDMMYYYY(): string {
 
 function getFY(dateStr: string): string {
   const d = parseDDMMYYYY(dateStr);
-  if (!d) { const y = new Date().getFullYear(); return `${y}-${String(y + 1).slice(2)}`; }
+  const now = new Date();
+  if (!d) { return String(now.getMonth() >= 3 ? now.getFullYear() + 1 : now.getFullYear()); }
   const y = d.getFullYear();
   const m = d.getMonth() + 1;
-  const fyStart = m >= 4 ? y : y - 1;
-  return `${fyStart}-${String(fyStart + 1).slice(2)}`;
+  return String(m >= 4 ? y + 1 : y);
 }
 
 const CONTRACTORS = [
@@ -323,27 +323,28 @@ const defaultForm: FormData = {
   officeName: "PWD Electric Circle, Udaipur",
 };
 
-const BALLOONS = [
-  { color: "#ff69b4", left: "5%",  delay: "0s",   dur: "4s"  },
-  { color: "#c2185b", left: "15%", delay: "0.6s",  dur: "3.5s" },
-  { color: "#ff1493", left: "28%", delay: "1.2s",  dur: "5s"  },
-  { color: "#ad1457", left: "42%", delay: "0.3s",  dur: "4.2s" },
-  { color: "#f48fb1", left: "57%", delay: "0.9s",  dur: "3.8s" },
-  { color: "#e91e63", left: "70%", delay: "1.5s",  dur: "4.6s" },
-  { color: "#880e4f", left: "83%", delay: "0.5s",  dur: "3.2s" },
-  { color: "#ff80ab", left: "93%", delay: "1.1s",  dur: "4.8s" },
+const DIYAS = [
+  { left: "3%",  delay: "0s",    dur: "2.8s" },
+  { left: "11%", delay: "0.4s",  dur: "3.2s" },
+  { left: "21%", delay: "0.9s",  dur: "2.5s" },
+  { left: "33%", delay: "0.2s",  dur: "3.6s" },
+  { left: "46%", delay: "1.1s",  dur: "2.9s" },
+  { left: "59%", delay: "0.6s",  dur: "3.1s" },
+  { left: "70%", delay: "1.4s",  dur: "2.7s" },
+  { left: "81%", delay: "0.3s",  dur: "3.4s" },
+  { left: "91%", delay: "0.8s",  dur: "2.6s" },
 ];
 
-function Balloons() {
+function Diyas() {
   return (
     <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "hidden", pointerEvents: "none" }}>
-      {BALLOONS.map((b, i) => (
-        <div key={i} style={{ position: "absolute", bottom: "0", left: b.left, animation: `floatBalloon ${b.dur} ${b.delay} ease-in-out infinite` }}>
-          <div style={{ width: 28, height: 34, borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%", background: b.color, boxShadow: `inset -4px -4px 8px rgba(0,0,0,0.2), inset 4px 4px 8px rgba(255,255,255,0.3)`, position: "relative" }}>
-            <div style={{ position: "absolute", bottom: -2, left: "50%", transform: "translateX(-50%)", width: 3, height: 3, background: b.color, borderRadius: "0 0 50% 50%" }} />
-          </div>
-          <div style={{ width: 1, height: 20, background: "rgba(255,255,255,0.5)", margin: "0 auto" }} />
+      {DIYAS.map((d, i) => (
+        <div key={i} style={{ position: "absolute", bottom: "4px", left: d.left, animation: `floatBalloon ${d.dur} ${d.delay} ease-in-out infinite` }}>
+          <div style={{ fontSize: "22px", lineHeight: 1, filter: "drop-shadow(0 0 6px #FFD700) drop-shadow(0 0 12px #FF8C00)" }}>🪔</div>
         </div>
+      ))}
+      {["8%","25%","43%","62%","78%","95%"].map((left, i) => (
+        <div key={`f${i}`} style={{ position: "absolute", top: "4px", left, fontSize: "16px", opacity: 0.7, animation: `floatBalloon ${2.4 + i * 0.3}s ${i * 0.5}s ease-in-out infinite` }}>🌸</div>
       ))}
     </div>
   );
@@ -548,38 +549,101 @@ export default function BillForm() {
     setTimeout(() => { win.print(); }, 600);
   }
 
-  const inputCls   = "w-full border border-pink-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-pink-500 bg-white";
-  const labelCls   = "text-xs font-semibold text-pink-900 mb-1 block";
-  const sectionCls = "bg-white rounded-xl border border-pink-200 p-4 mb-4 shadow-sm";
+  const inputCls   = "navratri-input";
+  const labelCls   = "navratri-label";
+  const sectionCls = "navratri-section";
 
   return (
     <>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap');
         @keyframes floatBalloon {
-          0%,100% { transform: translateY(0) rotate(-3deg); }
-          50%      { transform: translateY(-60px) rotate(3deg); }
+          0%,100% { transform: translateY(0) rotate(-2deg); }
+          50%      { transform: translateY(-14px) rotate(2deg); }
         }
         @keyframes shimmer {
           0%   { background-position: 0% center; }
           100% { background-position: 200% center; }
         }
+        @keyframes flameDance {
+          0%,100% { transform: scaleX(1) scaleY(1) rotate(-2deg); opacity: 1; }
+          50%      { transform: scaleX(0.85) scaleY(1.15) rotate(2deg); opacity: 0.85; }
+        }
+        @keyframes pulse-gold {
+          0%,100% { box-shadow: 0 0 0 0 rgba(255,180,0,0.35); }
+          50%      { box-shadow: 0 0 0 8px rgba(255,180,0,0); }
+        }
+        .navratri-section {
+          background: linear-gradient(135deg, #fffbf0 0%, #fff8e1 100%);
+          border: 1.5px solid #e6a817;
+          border-radius: 14px;
+          padding: 16px;
+          margin-bottom: 16px;
+          box-shadow: 0 2px 12px rgba(200,130,0,0.10);
+        }
+        .navratri-section h3 {
+          color: #7B2D00;
+          border-color: #e6a817;
+          font-weight: 700;
+        }
+        .navratri-input {
+          width: 100%;
+          border: 1.5px solid #e6a817;
+          border-radius: 8px;
+          padding: 5px 10px;
+          font-size: 0.85rem;
+          background: #fffef7;
+          color: #3a1a00;
+          outline: none;
+          transition: border-color 0.2s, box-shadow 0.2s;
+          font-family: 'Noto Sans Devanagari','Segoe UI',sans-serif;
+        }
+        .navratri-input:focus {
+          border-color: #c8720a;
+          box-shadow: 0 0 0 3px rgba(230,168,23,0.25);
+        }
+        .navratri-label {
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #7B2D00;
+          margin-bottom: 3px;
+          display: block;
+          letter-spacing: 0.01em;
+        }
+        .rangoli-divider {
+          text-align: center;
+          color: #e6a817;
+          font-size: 1.1rem;
+          letter-spacing: 0.3em;
+          margin: 4px 0;
+          opacity: 0.8;
+        }
       `}</style>
 
-      <div style={{ fontFamily: "'Noto Sans Devanagari','Segoe UI',sans-serif", minHeight: "100vh", background: "#fdf2f8" }}>
-        <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #880e4f, #e91e63, #880e4f)", backgroundSize: "200% auto", animation: "shimmer 6s linear infinite", padding: "12px 20px" }}>
-          <Balloons />
-          <div style={{ position: "relative", zIndex: 1, textAlign: "center", color: "#fff", fontWeight: 700, fontSize: "1.1rem", letterSpacing: "0.05em", textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
-            🌸 हिंदी बिल नोट शीट जनरेटर &nbsp;|&nbsp; Hindi Bill Note Sheet Generator 🌸
+      <div style={{ fontFamily: "'Noto Sans Devanagari','Segoe UI',sans-serif", minHeight: "100vh", background: "linear-gradient(160deg, #fff8e1 0%, #fff3e0 40%, #fce4ec 100%)" }}>
+
+        {/* NAVRATRI HEADER */}
+        <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #7B0D00 0%, #c0392b 25%, #e67e22 50%, #c0392b 75%, #7B0D00 100%)", backgroundSize: "300% auto", animation: "shimmer 8s linear infinite", borderBottom: "4px solid #FFD700" }}>
+          <Diyas />
+          <div style={{ position: "relative", zIndex: 1, textAlign: "center", padding: "10px 20px 6px" }}>
+            <div style={{ color: "#FFD700", fontWeight: 900, fontSize: "1.25rem", letterSpacing: "0.08em", textShadow: "0 0 12px rgba(255,215,0,0.8), 0 2px 6px rgba(0,0,0,0.5)" }}>
+              🪔 हिंदी बिल नोट शीट जनरेटर 🪔
+            </div>
+            <div style={{ color: "#FFEAA7", fontWeight: 500, fontSize: "0.78rem", letterSpacing: "0.12em", marginTop: "2px" }}>
+              Hindi Bill Note Sheet Generator &nbsp;✦&nbsp; नवरात्रि की शुभकामनाएं
+            </div>
           </div>
+          {/* Rangoli border strip */}
+          <div style={{ background: "linear-gradient(90deg, #FFD700, #FF8C00, #FFD700)", height: "3px" }} />
         </div>
 
         <div className="flex flex-col lg:flex-row gap-4 p-4 max-w-[1400px] mx-auto">
 
           {/* INPUT FORM */}
           <div className="lg:w-1/2 flex flex-col">
-            <div style={{ background: "linear-gradient(135deg, #fce4ec, #f8bbd0)", border: "1px solid #f48fb1" }} className="rounded-xl p-3 mb-4">
-              <h2 className="font-bold text-sm" style={{ color: "#880e4f" }}>📝 इनपुट फॉर्म / Input Form — Bill Details</h2>
-              <p className="text-xs mt-1" style={{ color: "#c2185b" }}>विवरण भरें, नोट शीट स्वतः अपडेट होगी / Fill details, note sheet updates automatically</p>
+            <div style={{ background: "linear-gradient(135deg, #7B0D00, #c0392b, #e67e22)", border: "2px solid #FFD700", borderRadius: "14px", padding: "12px 16px", marginBottom: "16px", boxShadow: "0 4px 20px rgba(200,80,0,0.25)" }}>
+              <h2 className="font-bold text-sm" style={{ color: "#FFD700", textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}>✦ इनपुट फॉर्म / Input Form — Bill Details ✦</h2>
+              <p className="text-xs mt-1" style={{ color: "#FFEAA7" }}>विवरण भरें, नोट शीट स्वतः अपडेट होगी / Fill details, note sheet updates automatically</p>
             </div>
 
             {/* Bill Number & Type */}
@@ -600,7 +664,7 @@ export default function BillForm() {
                   </select>
                 </div>
               </div>
-              <div className="mt-2 p-2 rounded text-center font-bold text-xs" style={{ background: "#fce4ec", color: "#880e4f", border: "1px solid #f48fb1" }}>
+              <div className="mt-2 p-2 rounded text-center font-bold text-xs" style={{ background: "linear-gradient(90deg,#7B0D00,#c0392b,#e67e22,#c0392b,#7B0D00)", color: "#FFD700", border: "2px solid #FFD700", letterSpacing: "0.05em", textShadow: "0 1px 3px rgba(0,0,0,0.4)" }}>
                 {billTitle}
               </div>
             </div>
