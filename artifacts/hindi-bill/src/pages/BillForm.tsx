@@ -297,7 +297,7 @@ const defaultForm: FormData = {
   subDivision: "Udaipur",
   subDivisionCustom: "",
   nameOfWork: "",
-  nameOfContractor: CONTRACTORS[0],
+  nameOfContractor: "",
   nameOfContractorCustom: "",
   originalOrDeposit: "Deposit",
   dateOfCommencement: "",
@@ -367,8 +367,29 @@ export default function BillForm() {
       setField(field, e.target.value);
     };
 
+  const [contractorSuggestions, setContractorSuggestions] = useState<string[]>([]);
+  const [showContractorDrop, setShowContractorDrop] = useState(false);
+
+  function handleContractorInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value;
+    setField("nameOfContractor", val);
+    if (val.trim().length > 0) {
+      const q = val.toLowerCase();
+      const filtered = CONTRACTORS.filter(c => c.toLowerCase().includes(q)).slice(0, 12);
+      setContractorSuggestions(filtered);
+      setShowContractorDrop(filtered.length > 0);
+    } else {
+      setContractorSuggestions(CONTRACTORS.slice(0, 12));
+      setShowContractorDrop(true);
+    }
+  }
+  function selectContractor(name: string) {
+    setField("nameOfContractor", name);
+    setShowContractorDrop(false);
+  }
+
   const effectiveSubDivision = form.subDivision === "__custom__" ? form.subDivisionCustom : form.subDivision;
-  const effectiveContractor  = form.nameOfContractor === "__custom__" ? form.nameOfContractorCustom : form.nameOfContractor;
+  const effectiveContractor  = form.nameOfContractor.trim() || "---";
 
   const billTitle = getBillTitle(form.billNumber, form.billType);
   const isFinal = form.billType === "Final";
@@ -735,14 +756,38 @@ export default function BillForm() {
                   <textarea className={inputCls} rows={2} value={form.nameOfWork} onChange={set("nameOfWork")} />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div>
+                  <div style={{ position: "relative" }}>
                     <label className={labelCls}>6. ठेकेदार / Contractor</label>
-                    <select className={inputCls} value={form.nameOfContractor} onChange={set("nameOfContractor")}>
-                      {CONTRACTORS.map(c => <option key={c} value={c}>{c}</option>)}
-                      <option value="__custom__">Other (type below)</option>
-                    </select>
-                    {form.nameOfContractor === "__custom__" && (
-                      <input className={inputCls + " mt-1"} value={form.nameOfContractorCustom} onChange={set("nameOfContractorCustom")} placeholder="M/s. Name, Town" />
+                    <input
+                      className={inputCls}
+                      value={form.nameOfContractor}
+                      onChange={handleContractorInput}
+                      onFocus={() => {
+                        const q = form.nameOfContractor.trim().toLowerCase();
+                        const list = q
+                          ? CONTRACTORS.filter(c => c.toLowerCase().includes(q)).slice(0, 12)
+                          : CONTRACTORS.slice(0, 12);
+                        setContractorSuggestions(list);
+                        setShowContractorDrop(list.length > 0);
+                      }}
+                      onBlur={() => setTimeout(() => setShowContractorDrop(false), 180)}
+                      placeholder="Type to search contractor…"
+                      autoComplete="off"
+                    />
+                    {showContractorDrop && (
+                      <div style={{ position: "absolute", top: "100%", left: 0, right: 0, background: "#fffef7", border: "1.5px solid #dda011", borderTop: "none", borderRadius: "0 0 8px 8px", maxHeight: "220px", overflowY: "auto", zIndex: 200, boxShadow: "0 6px 18px rgba(0,0,0,0.15)" }}>
+                        {contractorSuggestions.map((c, i) => (
+                          <div
+                            key={i}
+                            onMouseDown={() => selectContractor(c)}
+                            style={{ padding: "5px 10px", cursor: "pointer", fontSize: "0.8rem", color: "#3a1a00", borderBottom: "1px solid #f5e8c0" }}
+                            onMouseEnter={e => (e.currentTarget.style.background = "#fff3cd")}
+                            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                          >
+                            {c}
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </div>
                   <div>
