@@ -546,7 +546,6 @@ export default function BillForm() {
     win.document.write(html);
     win.document.close();
     win.focus();
-    setTimeout(() => { win.print(); }, 600);
   }
 
   const inputCls   = "navratri-input";
@@ -648,7 +647,7 @@ export default function BillForm() {
 
             {/* Bill Number & Type */}
             <div className={sectionCls}>
-              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#880e4f", borderColor: "#f48fb1" }}>बिल पहचान / Bill Identity</h3>
+              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#7B2D00", borderColor: "#e6a817" }}>बिल पहचान / Bill Identity</h3>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className={labelCls}>बिल क्रमांक / Bill Number</label>
@@ -671,7 +670,7 @@ export default function BillForm() {
 
             {/* Basic Info */}
             <div className={sectionCls}>
-              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#880e4f", borderColor: "#f48fb1" }}>मूल जानकारी / Basic Information</h3>
+              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#7B2D00", borderColor: "#e6a817" }}>मूल जानकारी / Basic Information</h3>
               <div className="grid grid-cols-1 gap-3">
                 <div className="grid grid-cols-2 gap-2">
                   <div>
@@ -727,7 +726,7 @@ export default function BillForm() {
 
             {/* Dates & Amounts */}
             <div className={sectionCls}>
-              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#880e4f", borderColor: "#f48fb1" }}>तिथियाँ व राशि / Dates & Amounts <span className="font-normal text-xs">(DD/MM/YYYY)</span></h3>
+              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#7B2D00", borderColor: "#e6a817" }}>तिथियाँ व राशि / Dates & Amounts <span className="font-normal text-xs">(DD/MM/YYYY)</span></h3>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className={labelCls}>8. प्रारंभ तिथि / Date of Commencement</label>
@@ -769,7 +768,7 @@ export default function BillForm() {
 
             {/* Conditions */}
             <div className={sectionCls}>
-              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#880e4f", borderColor: "#f48fb1" }}>शर्तें / Conditions & Flags</h3>
+              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#7B2D00", borderColor: "#e6a817" }}>शर्तें / Conditions & Flags</h3>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className={labelCls}>(A) मरम्मत/रखरखाव कार्य? / Repair/Maintenance?</label>
@@ -805,7 +804,7 @@ export default function BillForm() {
 
             {/* Deductions */}
             <div className={sectionCls}>
-              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#880e4f", borderColor: "#f48fb1" }}>कटौतियाँ / Deductions</h3>
+              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#7B2D00", borderColor: "#e6a817" }}>कटौतियाँ / Deductions</h3>
               <div className="grid grid-cols-1 gap-3">
                 <p className="text-xs text-gray-500">SD(10%), IT(2%), GST(2%), LC(1%) स्वचालित / auto-calculated. केवल Dep-V मैन्युअल।</p>
                 <div>
@@ -817,7 +816,7 @@ export default function BillForm() {
 
             {/* Other Details */}
             <div className={sectionCls}>
-              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#880e4f", borderColor: "#f48fb1" }}>अन्य विवरण / Other Details</h3>
+              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#7B2D00", borderColor: "#e6a817" }}>अन्य विवरण / Other Details</h3>
               <div className="grid grid-cols-1 gap-3">
                 <div>
                   <label className={labelCls}>17. EE द्वारा जाँची गई मदें / Selection Items Checked by EE</label>
@@ -843,17 +842,17 @@ export default function BillForm() {
             <button
               onClick={handlePrint}
               className="w-full font-bold py-3 rounded-xl text-sm transition-all mb-6 shadow-lg"
-              style={{ background: "linear-gradient(90deg, #880e4f, #e91e63, #880e4f)", backgroundSize: "200% auto", color: "#fff", animation: "shimmer 3s linear infinite", border: "none", cursor: "pointer" }}
+              style={{ background: "linear-gradient(90deg, #7B0D00, #c0392b, #e67e22, #c0392b, #7B0D00)", backgroundSize: "300% auto", color: "#FFD700", animation: "shimmer 4s linear infinite", border: "2px solid #FFD700", cursor: "pointer", textShadow: "0 1px 3px rgba(0,0,0,0.5)", letterSpacing: "0.03em" }}
             >
-              🖨️ Print Note Sheet / Save PDF — {getPdfFilename()}
+              🖨️ Print / Save PDF — {getPdfFilename()}
             </button>
           </div>
 
           {/* LIVE PREVIEW */}
           <div className="lg:w-1/2">
-            <div className="rounded-xl p-3 mb-4" style={{ background: "linear-gradient(135deg, #fce4ec, #f8bbd0)", border: "1px solid #f48fb1" }}>
-              <h2 className="font-bold text-sm" style={{ color: "#880e4f" }}>👁 Live Preview — Note Sheet Output</h2>
-              <p className="text-xs mt-1" style={{ color: "#c2185b" }}>Exactly what will print on A4 with 10 mm margins.</p>
+            <div className="rounded-xl p-3 mb-4" style={{ background: "linear-gradient(135deg, #7B0D00, #c0392b, #e67e22)", border: "2px solid #FFD700", boxShadow: "0 4px 20px rgba(200,80,0,0.20)" }}>
+              <h2 className="font-bold text-sm" style={{ color: "#FFD700", textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}>✦ Live Preview — Note Sheet Output ✦</h2>
+              <p className="text-xs mt-1" style={{ color: "#FFEAA7" }}>Exactly what will print on A4 with 10 mm margins.</p>
             </div>
             <NoteSheetTable
               billTitle={billTitle}
@@ -886,7 +885,7 @@ function NoteSheetTable({ billTitle, outputRows, deductionRows, notePoints, sign
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            <td colSpan={2} className="border border-gray-500 text-center font-bold py-2 text-sm" style={{ background: "#fce4ec", color: "#880e4f" }}>
+            <td colSpan={2} className="border border-gray-500 text-center font-bold py-2 text-sm" style={{ background: "linear-gradient(90deg,#7B0D00,#c0392b,#e67e22,#c0392b,#7B0D00)", color: "#FFD700", letterSpacing: "0.04em" }}>
               {billTitle}
             </td>
           </tr>
@@ -955,9 +954,10 @@ function buildPrintHtml(
   @page { size: A4 portrait; margin: 10mm; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:'Noto Sans Devanagari','Segoe UI',sans-serif; font-size:${baseFontPt}pt; color:#000; background:#fff; }
+  #wrap { transform-origin: top left; }
   table { width:100%; border-collapse:collapse; }
   td { border:1px solid #555; padding:${cellPad}; vertical-align:top; }
-  .h  { text-align:center; font-weight:700; font-size:${baseFontPt + 1}pt; background:#fce4ec; color:#880e4f; padding:4px; }
+  .h  { text-align:center; font-weight:700; font-size:${baseFontPt + 1}pt; background:#8B0000; color:#FFD700; padding:5px; letter-spacing:0.04em; }
   .l  { font-weight:600; background:#f5f5f5; width:50%; }
   .r  { width:50%; }
   .dh { font-weight:700; background:#ebebeb; }
@@ -966,8 +966,27 @@ function buildPrintHtml(
   li { margin-bottom:${totalItems <= 35 ? 3 : 2}px; line-height:${totalItems <= 40 ? 1.6 : 1.4}; }
   .sig { text-align:center; font-weight:600; margin-top:12px; }
 </style>
+<script>
+  function scaleAndPrint() {
+    var wrap = document.getElementById('wrap');
+    var pageH = 277;
+    var actualMM = wrap.scrollHeight * 0.2646;
+    if (actualMM > pageH) {
+      var s = pageH / actualMM;
+      wrap.style.transform = 'scale(' + s + ')';
+      wrap.style.width = Math.round(100 / s) + '%';
+    }
+    window.print();
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function(){ setTimeout(scaleAndPrint, 200); });
+  } else {
+    window.onload = function(){ setTimeout(scaleAndPrint, 800); };
+  }
+</script>
 </head>
 <body>
+<div id="wrap">
 <table>
   <tr><td colspan="2" class="h">${billTitle}</td></tr>
   ${rowsHtml}
@@ -977,6 +996,7 @@ function buildPrintHtml(
 <div class="note-section">
   <ol>${notesHtml}</ol>
   <div class="sig">${signatoryName}</div>
+</div>
 </div>
 </body>
 </html>`;
