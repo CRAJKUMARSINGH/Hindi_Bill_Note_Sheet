@@ -320,7 +320,7 @@ const defaultForm: FormData = {
   lc1: "",
   depV: "0",
   signatoryName: "प्रेमलता जैन, AAO",
-  officeName: "PWD Electric Circle, Udaipur",
+  officeName: "PWD Electric Division, Udaipur",
 };
 
 const DIYAS = [
@@ -891,18 +891,9 @@ export default function BillForm() {
               </div>
             </div>
 
-            {/* Other Details */}
+            {/* Signatory & Office */}
             <div className={sectionCls}>
-              <h3 className="font-bold text-sm mb-3 border-b pb-1" style={{ color: "#7B2D00", borderColor: "#e6a817" }}>अन्य विवरण / Other Details</h3>
               <div className="grid grid-cols-1 gap-3">
-                <div>
-                  <label className={labelCls}>17. EE द्वारा जाँची गई मदें / Selection Items Checked by EE</label>
-                  <input className={inputCls} value={form.selectionItemsCheckedEE} onChange={set("selectionItemsCheckedEE")} placeholder="(optional)" />
-                </div>
-                <div>
-                  <label className={labelCls}>18. अन्य इनपुट / Other Inputs</label>
-                  <input className={inputCls} value={form.otherInputs} onChange={set("otherInputs")} placeholder="(optional)" />
-                </div>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className={labelCls}>हस्ताक्षरकर्ता / Signatory Name</label>
