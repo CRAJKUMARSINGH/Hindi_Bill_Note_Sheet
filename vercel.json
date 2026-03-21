@@ -1,7 +1,7 @@
 {
-  "buildCommand": "cd artifacts/hindi-bill && pnpm install && pnpm run build -- --config vite.config.vercel.ts",
+  "buildCommand": "cd artifacts/hindi-bill && pnpm install --no-frozen-lockfile && pnpm run build:vercel",
   "outputDirectory": "artifacts/hindi-bill/dist",
-  "installCommand": "pnpm install --no-frozen-lockfile",
+  "installCommand": "echo 'Using buildCommand for install'",
   "framework": null,
   "rewrites": [
     {
