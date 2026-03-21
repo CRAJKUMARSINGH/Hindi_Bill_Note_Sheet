@@ -3,6 +3,9 @@
   "outputDirectory": "artifacts/hindi-bill/dist",
   "installCommand": "echo 'Using buildCommand for install'",
   "framework": null,
+  "github": {
+    "silent": true
+  },
   "rewrites": [
     {
       "source": "/(.*)",
