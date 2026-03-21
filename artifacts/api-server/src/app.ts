@@ -1,9 +1,11 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import type { IncomingMessage, ServerResponse } from "http";
-import pinoHttp, { type StdSerializers } from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
+
+// Use require for pino-http to avoid TypeScript callable signature issues
+const pinoHttp = require("pino-http").default || require("pino-http");
 
 const app: Express = express();
 
@@ -16,15 +18,15 @@ app.use(
           id: (req as any).id,
           method: req.method,
           url: req.url?.split("?")[0],
-        } as const;
+        };
       },
       res(res: ServerResponse) {
         return {
           statusCode: res.statusCode,
-        } as const;
+        };
       },
     },
-  }) as express.RequestHandler,
+  }),
 );
 app.use(cors());
 app.use(express.json());
