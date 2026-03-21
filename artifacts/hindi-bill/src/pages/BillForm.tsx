@@ -498,7 +498,7 @@ export default function BillForm() {
     ["6. Name of Contractor", effectiveContractor || "---"],
     ["7. Original / Deposit", form.originalOrDeposit],
     ["8. Date of Commencement", formatDDMMYYYY(form.dateOfCommencement)],
-    ["9. Date of Completion (Scheduled)", formatDDMMYYYY(form.dateOfCompletion)],
+    ...(isFinal ? [["9. Date of Completion (Scheduled)", formatDDMMYYYY(form.dateOfCompletion)] as [string, string]] : []),
     ["10. Actual Date of Completion", formatDDMMYYYY(form.actualDateOfCompletion)],
     ["11. Total Amount of Work Order", `Rs. ${workOrderAmt.toLocaleString("en-IN")}`],
     ["12A. Sum of payment up to last bill", `Rs. ${lastBillAmt.toLocaleString("en-IN")}`],
