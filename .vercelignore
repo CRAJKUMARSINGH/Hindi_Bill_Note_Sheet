@@ -1,0 +1,9 @@
+node_modules
+.git
+.local
+.vscode
+.replit
+.replitignore
+replit.md
+Bill-Note-Sheet
+attached_assets
