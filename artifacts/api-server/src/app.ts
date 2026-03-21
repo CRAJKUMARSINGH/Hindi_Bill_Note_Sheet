@@ -1,26 +1,28 @@
 import express, { type Express } from "express";
 import cors from "cors";
-import type { IncomingMessage, ServerResponse } from "http";
 import router from "./routes";
 import { logger } from "./lib/logger";
 
-// Use require for pino-http to avoid TypeScript callable signature issues
-const pinoHttp = require("pino-http").default || require("pino-http");
+// @ts-ignore - pino-http has type definition issues in build environments
+import pinoHttp from "pino-http";
 
 const app: Express = express();
 
 app.use(
+  // @ts-ignore - type inference issue with pino-http v10
   pinoHttp({
     logger,
     serializers: {
-      req(req: IncomingMessage) {
+      // @ts-ignore - implicit any due to parent type issue
+      req(req: any) {
         return {
-          id: (req as any).id,
+          id: req.id,
           method: req.method,
           url: req.url?.split("?")[0],
         };
       },
-      res(res: ServerResponse) {
+      // @ts-ignore - implicit any due to parent type issue
+      res(res: any) {
         return {
           statusCode: res.statusCode,
         };
