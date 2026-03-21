@@ -569,45 +569,72 @@ export default function BillForm() {
           50%      { transform: scaleX(0.85) scaleY(1.15) rotate(2deg); opacity: 0.85; }
         }
         @keyframes pulse-gold {
-          0%,100% { box-shadow: 0 0 0 0 rgba(255,180,0,0.35); }
-          50%      { box-shadow: 0 0 0 8px rgba(255,180,0,0); }
+          0%,100% { box-shadow: 0 0 0 0 rgba(255,180,0,0.45), 0 4px 20px rgba(200,80,0,0.25); }
+          50%      { box-shadow: 0 0 0 10px rgba(255,180,0,0), 0 4px 20px rgba(200,80,0,0.25); }
+        }
+        @keyframes goldGlow {
+          0%,100% { box-shadow: 0 0 8px 2px rgba(255,200,0,0.3), 0 4px 20px rgba(200,80,0,0.2); }
+          50%      { box-shadow: 0 0 18px 4px rgba(255,200,0,0.55), 0 4px 24px rgba(200,80,0,0.3); }
         }
         .navratri-section {
-          background: linear-gradient(135deg, #fffbf0 0%, #fff8e1 100%);
+          background: linear-gradient(135deg, #fffbf0 0%, #fff8e1 60%, #fff3cd 100%);
           border: 1.5px solid #e6a817;
+          border-left: 5px solid #c0392b;
           border-radius: 14px;
-          padding: 16px;
-          margin-bottom: 16px;
-          box-shadow: 0 2px 12px rgba(200,130,0,0.10);
+          padding: 16px 16px 14px;
+          margin-bottom: 14px;
+          box-shadow: 0 3px 16px rgba(180,100,0,0.12), inset 0 1px 0 rgba(255,215,0,0.3);
+          position: relative;
+          overflow: hidden;
+        }
+        .navratri-section::after {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #7B0D00, #e67e22, #FFD700, #e67e22, #7B0D00);
+          border-radius: 14px 14px 0 0;
         }
         .navratri-section h3 {
           color: #7B2D00;
           border-color: #e6a817;
-          font-weight: 700;
+          font-weight: 800;
+          letter-spacing: 0.02em;
+        }
+        .navratri-section h3::before {
+          content: '✦ ';
+          color: #c0392b;
+          font-size: 0.65rem;
         }
         .navratri-input {
           width: 100%;
-          border: 1.5px solid #e6a817;
+          border: 1.5px solid #dda011;
           border-radius: 8px;
           padding: 5px 10px;
-          font-size: 0.85rem;
-          background: #fffef7;
+          font-size: 0.84rem;
+          background: linear-gradient(135deg, #fffef7, #fffbef);
           color: #3a1a00;
           outline: none;
-          transition: border-color 0.2s, box-shadow 0.2s;
+          transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
           font-family: 'Noto Sans Devanagari','Segoe UI',sans-serif;
+          box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
         }
         .navratri-input:focus {
-          border-color: #c8720a;
-          box-shadow: 0 0 0 3px rgba(230,168,23,0.25);
+          border-color: #b85c08;
+          box-shadow: 0 0 0 3px rgba(230,168,23,0.30), inset 0 1px 3px rgba(0,0,0,0.06);
+          background: #fffff5;
+        }
+        .navratri-input:hover:not(:focus) {
+          border-color: #c8900a;
         }
         .navratri-label {
-          font-size: 0.72rem;
-          font-weight: 700;
-          color: #7B2D00;
+          font-size: 0.70rem;
+          font-weight: 800;
+          color: #6B2000;
           margin-bottom: 3px;
           display: block;
-          letter-spacing: 0.01em;
+          letter-spacing: 0.02em;
+          text-transform: none;
         }
         .rangoli-divider {
           text-align: center;
@@ -617,9 +644,14 @@ export default function BillForm() {
           margin: 4px 0;
           opacity: 0.8;
         }
+        .preview-row-odd  { background: #fffbf0; }
+        .preview-row-even { background: #ffffff; }
+        .preview-row-odd:hover, .preview-row-even:hover { background: #fff3cd; }
+        .preview-td-label { border: 1px solid #b5b5b5; padding: 3px 8px; font-weight: 700; background: #fff8e8; width: 50%; vertical-align: top; font-size: 0.72rem; color: #5a2000; }
+        .preview-td-value { border: 1px solid #b5b5b5; padding: 3px 8px; width: 50%; vertical-align: top; font-size: 0.72rem; color: #1a1a1a; }
       `}</style>
 
-      <div style={{ fontFamily: "'Noto Sans Devanagari','Segoe UI',sans-serif", minHeight: "100vh", background: "linear-gradient(160deg, #fff8e1 0%, #fff3e0 40%, #fce4ec 100%)" }}>
+      <div style={{ fontFamily: "'Noto Sans Devanagari','Segoe UI',sans-serif", minHeight: "100vh", background: "linear-gradient(160deg, #fff8e1 0%, #fff3e0 40%, #fce4ec 100%)", backgroundImage: "radial-gradient(circle, rgba(200,100,0,0.08) 1.5px, transparent 1.5px)", backgroundSize: "28px 28px" }}>
 
         {/* NAVRATRI HEADER */}
         <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #7B0D00 0%, #c0392b 25%, #e67e22 50%, #c0392b 75%, #7B0D00 100%)", backgroundSize: "300% auto", animation: "shimmer 8s linear infinite", borderBottom: "4px solid #FFD700" }}>
@@ -841,10 +873,10 @@ export default function BillForm() {
 
             <button
               onClick={handlePrint}
-              className="w-full font-bold py-3 rounded-xl text-sm transition-all mb-6 shadow-lg"
-              style={{ background: "linear-gradient(90deg, #7B0D00, #c0392b, #e67e22, #c0392b, #7B0D00)", backgroundSize: "300% auto", color: "#FFD700", animation: "shimmer 4s linear infinite", border: "2px solid #FFD700", cursor: "pointer", textShadow: "0 1px 3px rgba(0,0,0,0.5)", letterSpacing: "0.03em" }}
+              className="w-full font-bold py-3 rounded-xl text-sm transition-all mb-6"
+              style={{ background: "linear-gradient(90deg, #7B0D00, #c0392b, #e67e22, #c0392b, #7B0D00)", backgroundSize: "300% auto", color: "#FFD700", animation: "shimmer 4s linear infinite, pulse-gold 2.4s ease-in-out infinite", border: "2.5px solid #FFD700", cursor: "pointer", textShadow: "0 1px 4px rgba(0,0,0,0.6)", letterSpacing: "0.05em", fontSize: "0.88rem" }}
             >
-              🖨️ Print / Save PDF — {getPdfFilename()}
+              🖨️&nbsp; Print / Save PDF &nbsp;—&nbsp; {getPdfFilename()}
             </button>
           </div>
 
@@ -863,6 +895,13 @@ export default function BillForm() {
             />
           </div>
         </div>
+
+        {/* FOOTER */}
+        <div style={{ background: "linear-gradient(90deg, #7B0D00, #c0392b, #e67e22, #c0392b, #7B0D00)", borderTop: "3px solid #FFD700", padding: "8px 20px", textAlign: "center", marginTop: "8px" }}>
+          <div style={{ color: "#FFD700", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+            🌸&nbsp; हिंदी बिल नोट शीट जनरेटर &nbsp;✦&nbsp; PWD Rajasthan &nbsp;✦&nbsp; नवरात्रि की शुभकामनाएं &nbsp;🌸
+          </div>
+        </div>
       </div>
     </>
   );
@@ -877,45 +916,43 @@ interface TableProps {
 }
 
 function NoteSheetTable({ billTitle, outputRows, deductionRows, notePoints, signatoryName }: TableProps) {
-  const tdL = "border border-gray-500 px-2 py-1 font-semibold bg-gray-50 w-1/2 align-top text-xs";
-  const tdR = "border border-gray-500 px-2 py-1 w-1/2 align-top text-xs";
-
   return (
-    <div className="bg-white border border-gray-400 text-black text-xs overflow-auto" style={{ fontFamily: "'Noto Sans Devanagari','Segoe UI',sans-serif" }}>
+    <div className="bg-white border border-gray-400 text-black text-xs overflow-auto" style={{ fontFamily: "'Noto Sans Devanagari','Segoe UI',sans-serif", borderRadius: "0 0 10px 10px" }}>
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            <td colSpan={2} className="border border-gray-500 text-center font-bold py-2 text-sm" style={{ background: "linear-gradient(90deg,#7B0D00,#c0392b,#e67e22,#c0392b,#7B0D00)", color: "#FFD700", letterSpacing: "0.04em" }}>
+            <td colSpan={2} className="border border-gray-400 text-center font-bold py-2 px-2 text-sm" style={{ background: "linear-gradient(90deg,#7B0D00,#c0392b,#e67e22,#c0392b,#7B0D00)", color: "#FFD700", letterSpacing: "0.05em", textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}>
               {billTitle}
             </td>
           </tr>
         </thead>
         <tbody>
           {outputRows.map(([label, value], i) => (
-            <tr key={i}>
-              <td className={tdL}>{label}</td>
-              <td className={tdR}>{value}</td>
+            <tr key={i} className={i % 2 === 0 ? "preview-row-odd" : "preview-row-even"} style={{ transition: "background 0.15s" }}>
+              <td className="preview-td-label">{label}</td>
+              <td className="preview-td-value">{value}</td>
             </tr>
           ))}
           <tr>
-            <td colSpan={2} className="border border-gray-500 px-2 py-1 font-bold bg-gray-100 text-xs">
-              Deductions:- &nbsp; Rs.
+            <td colSpan={2} className="border border-gray-400 px-2 py-1 font-bold text-xs" style={{ background: "linear-gradient(90deg,#8B0000,#c0392b)", color: "#FFD700", letterSpacing: "0.03em" }}>
+              ▸ Deductions :- Rs.
             </td>
           </tr>
           {deductionRows.map(([label, value], i) => (
-            <tr key={i}>
-              <td className={tdL + " pl-6"}>{label}</td>
-              <td className={tdR}>{value}</td>
+            <tr key={i} style={{ background: i % 2 === 0 ? "#fff5f5" : "#fff9f9" }}>
+              <td className="preview-td-label" style={{ paddingLeft: "1.5rem", background: i % 2 === 0 ? "#fff0ee" : "#fff5f5" }}>{label}</td>
+              <td className="preview-td-value">{value}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <div className="border-t border-gray-500 p-3">
-        <ol className="list-none space-y-1 text-xs leading-relaxed">
-          {notePoints.map((pt, i) => <li key={i}>{pt}</li>)}
+      <div style={{ borderTop: "2px solid #c0392b", padding: "10px 12px 8px", background: "linear-gradient(135deg,#fffbf0,#fff8e1)" }}>
+        <div style={{ fontSize: "0.67rem", fontWeight: 800, color: "#7B0D00", letterSpacing: "0.08em", marginBottom: "5px", borderBottom: "1px dashed #e6a817", paddingBottom: "3px" }}>NOTE :</div>
+        <ol className="list-none text-xs leading-relaxed" style={{ color: "#1a1a1a" }}>
+          {notePoints.map((pt, i) => <li key={i} style={{ marginBottom: "3px", paddingLeft: "4px", borderLeft: "2px solid #e6a817" }}>{pt}</li>)}
         </ol>
-        <div className="mt-4 text-center text-xs font-semibold">
+        <div className="mt-4 text-center text-xs font-bold" style={{ color: "#7B0D00", letterSpacing: "0.05em", paddingTop: "6px", borderTop: "1px solid #e6a817" }}>
           {signatoryName}
         </div>
       </div>
