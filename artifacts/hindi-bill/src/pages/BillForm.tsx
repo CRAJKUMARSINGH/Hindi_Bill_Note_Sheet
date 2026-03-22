@@ -530,8 +530,8 @@ export default function BillForm() {
     ["6. Name of Contractor", effectiveContractor || "---"],
     ["7. Original / Deposit", form.originalOrDeposit],
     ["8. Date of Commencement", formatDDMMYYYY(form.dateOfCommencement)],
-    ...(isFinal ? [["9. Date of Completion (Scheduled)", formatDDMMYYYY(form.dateOfCompletion)] as [string, string]] : []),
-    ["10. Actual Date of Completion", formatDDMMYYYY(form.actualDateOfCompletion)],
+    ["9. Date of Completion (Scheduled)", formatDDMMYYYY(form.dateOfCompletion)],
+    ...(isFinal ? [["10. Actual Date of Completion", formatDDMMYYYY(form.actualDateOfCompletion)] as [string, string]] : []),
     ["11. Total Amount of Work Order", `Rs. ${workOrderAmt.toLocaleString("en-IN")}`],
     ["12A. Sum of payment up to last bill", `Rs. ${lastBillAmt.toLocaleString("en-IN")}`],
     ["12B. Amount of this bill", `Rs. ${thisBillAmt.toLocaleString("en-IN")}`],
@@ -820,15 +820,13 @@ export default function BillForm() {
                   <label className={labelCls}>8. प्रारंभ तिथि / Date of Commencement</label>
                   <input className={inputCls} value={form.dateOfCommencement} onChange={setDate("dateOfCommencement")} placeholder="DDMMYYYY" maxLength={10} />
                 </div>
-                {isFinal && (
                 <div>
-                  <label className={labelCls}>9. पूर्णता तिथि (निर्धारित) / Date of Completion</label>
+                  <label className={labelCls}>9. पूर्णता तिथि (निर्धारित) / Date of Completion (Scheduled)</label>
                   <input className={inputCls} value={form.dateOfCompletion} onChange={setDate("dateOfCompletion")} placeholder="DDMMYYYY" maxLength={10} />
                 </div>
-                )}
-                <div>
+                <div className={!isFinal ? "opacity-30 pointer-events-none" : ""}>
                   <label className={labelCls}>10. वास्तविक पूर्णता तिथि / Actual Completion Date</label>
-                  <input className={inputCls} value={form.actualDateOfCompletion} onChange={setDate("actualDateOfCompletion")} placeholder="DDMMYYYY" maxLength={10} />
+                  <input className={inputCls} value={form.actualDateOfCompletion} onChange={setDate("actualDateOfCompletion")} placeholder="DDMMYYYY" maxLength={10} disabled={!isFinal} />
                 </div>
                 <div>
                   <label className={labelCls}>11. कुल कार्यादेश राशि / Total Work Order Amount (₹)</label>
