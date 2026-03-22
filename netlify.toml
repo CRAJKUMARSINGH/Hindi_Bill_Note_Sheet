@@ -1,6 +1,6 @@
 [build]
-  base    = "artifacts/hindi-bill"
-  command = "npm install && npx vite build --config vite.config.netlify.ts"
+  base    = ""
+  command = "npm install -g pnpm && pnpm install --no-frozen-lockfile && pnpm --filter @workspace/hindi-bill exec vite build --config vite.config.netlify.ts"
   publish = "artifacts/hindi-bill/dist"
 
 [[redirects]]
