@@ -1,7 +1,7 @@
 [build]
-  base    = "artifacts/hindi-bill"
-  command = "bash netlify-build.sh"
-  publish = "dist"
+  base    = ""
+  command = "bash artifacts/hindi-bill/netlify-build.sh"
+  publish = "artifacts/hindi-bill/dist"
 
 [[redirects]]
   from   = "/*"

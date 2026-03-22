@@ -1,5 +1,10 @@
 #!/bin/bash
 set -e
+
+cd artifacts/hindi-bill
+
 cp package.netlify.json package.json
+
 npm install
-npm run build:netlify
+
+npx vite build --config vite.config.netlify.ts
