@@ -1,0 +1,50 @@
+{
+  "name": "Hindi Bill Note Sheet Generator",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-typescript-next",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true
+      }
+    }
+  },
+
+  "forwardPorts": [5173, 3000],
+  "portsAttributes": {
+    "5173": {
+      "label": "Hindi Bill App",
+      "onAutoForward": "notify"
+    },
+    "3000": {
+      "label": "API Server",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "postCreateCommand": "npm install -g pnpm && pnpm install",
+  
+  "postStartCommand": "echo '🪔 Hindi Bill Note Sheet Generator - Ready!' && echo 'Run: cd artifacts/hindi-bill && pnpm run dev'",
+
+  "remoteUser": "node"
+}
