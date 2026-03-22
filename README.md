@@ -2,198 +2,215 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/CRAJKUMARSINGH/TEMP)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/CRAJKUMARSINGH/TEMP.git)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19-61dafb.svg)](https://reactjs.org/)
 
-A beautiful, Navratri-themed web application for generating Hindi Bill Note Sheets for PWD Rajasthan.
+> A beautiful, Navratri-themed web application for generating Hindi Bill Note Sheets for PWD Rajasthan Electric Division.
 
 ## ✨ Features
 
-- 🎨 **Festive UI**: Navratri-themed design with diyas and rangoli
-- 📝 **Interactive Form**: Easy-to-use input form with autocomplete
-- 👁️ **Live Preview**: See your note sheet update in real-time
-- 🖨️ **PDF Generation**: Print or save as PDF with one click
-- 📱 **Responsive**: Works on desktop, tablet, and mobile
-- 🌐 **Bilingual**: Hindi and English labels throughout
+- 🎨 **Festive UI** - Navratri-themed design with diyas and rangoli
+- 📝 **Interactive Form** - Easy-to-use input with autocomplete for contractors
+- 👁️ **Live Preview** - Real-time note sheet updates as you type
+- 🖨️ **PDF Generation** - One-click print or save as PDF
+- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile
+- 🌐 **Bilingual** - Hindi and English labels throughout
+- ⚡ **Lightning Fast** - Built with Vite for instant hot reload
+- 🎯 **Smart Validation** - Automatic deviation notes based on execution percentage
 
 ## 🚀 Quick Start
 
-### GitHub Codespaces (Easiest)
+### Option 1: GitHub Codespaces (Easiest - No Setup Required!)
 
 1. Click the **Open in GitHub Codespaces** badge above
-2. Wait for the environment to load (2-3 minutes)
-3. Run the setup script:
-   ```bash
-   bash setup-codespaces.sh
-   ```
-4. Start developing! 🎉
+2. Wait 2-3 minutes for environment setup
+3. Run: `bash setup-codespaces.sh`
+4. Start coding! 🎉
 
-[📖 Full Codespaces Guide](./CODESPACES_SETUP.md)
-
-### Local Development
+### Option 2: Local Development
 
 ```bash
 # Clone the repository
 git clone https://github.com/CRAJKUMARSINGH/TEMP.git
 cd TEMP
 
-# Install pnpm
+# Install pnpm (if not already installed)
 npm install -g pnpm
 
 # Install dependencies
 pnpm install
 
-# Start the frontend app
+# Start the app
 cd artifacts/hindi-bill
 pnpm run dev
 ```
 
-[📖 Quick Start Guide](./QUICK_START.md)
+Open http://localhost:5173 in your browser.
 
-### Deploy to Vercel
+### Option 3: Deploy to Vercel (Production)
 
-Click the **Deploy with Vercel** badge above or:
+Click the **Deploy with Vercel** badge above, or:
 
 ```bash
 npm i -g vercel
 vercel
 ```
 
-[📖 Deployment Guide](./VERCEL_DEPLOYMENT.md)
+## 🎯 How to Use
+
+1. **Fill the Form**
+   - Enter bill number, type (Running/Final), and dates
+   - Add work details (name, agreement amount, completion date)
+   - Select contractor from autocomplete dropdown
+   - Enter financial details (bill amount, deductions, net payable)
+
+2. **Live Preview**
+   - Watch the note sheet update in real-time on the right side
+   - See automatic deviation notes based on execution percentage
+   - Preview exactly what will be printed
+
+3. **Generate PDF**
+   - Click "Print / Save PDF" button
+   - Use browser's print dialog to save as PDF or print directly
+   - Professional formatting ready for official use
 
 ## 📁 Project Structure
 
 ```
 TEMP/
 ├── artifacts/
-│   ├── hindi-bill/              # 🎯 Frontend React App (Vite + TypeScript)
-│   │   ├── src/
-│   │   │   ├── pages/
-│   │   │   │   └── BillForm.tsx # Main form component
-│   │   │   ├── components/      # UI components
-│   │   │   └── App.tsx
-│   │   ├── vite.config.ts       # Development config
-│   │   └── vite.config.vercel.ts # Production config
-│   ├── api-server/              # Backend API (Express + TypeScript)
-│   └── mockup-sandbox/          # UI mockup sandbox
-├── lib/                         # Shared libraries
-│   ├── api-client-react/        # React API client
-│   ├── api-spec/                # OpenAPI specification
-│   ├── api-zod/                 # Zod schemas
-│   └── db/                      # Database schemas
-├── .devcontainer/               # Codespaces configuration
-├── setup-codespaces.sh          # Automated setup script
+│   └── hindi-bill/              # 🎯 Main React App
+│       ├── src/
+│       │   ├── pages/
+│       │   │   └── BillForm.tsx # Core form component
+│       │   ├── components/      # Reusable UI components
+│       │   └── App.tsx
+│       ├── vite.config.ts       # Development config
+│       └── vite.config.vercel.ts # Production config
+├── .devcontainer/               # Codespaces auto-configuration
+├── setup-codespaces.sh          # One-command setup script
 ├── vercel.json                  # Vercel deployment config
-└── README.md                    # This file
+└── DOCUMENTATION.md             # Complete setup & deployment guide
 ```
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 19, TypeScript, Vite, Tailwind CSS
-- **UI Components**: Radix UI, Lucide Icons
+- **Frontend**: React 19 + TypeScript + Vite
 - **Styling**: Tailwind CSS with custom Navratri theme
-- **Build Tool**: Vite
-- **Package Manager**: pnpm (monorepo)
-- **Deployment**: Vercel
+- **UI Components**: Radix UI + Lucide Icons
+- **Build Tool**: Vite (ultra-fast HMR)
+- **Package Manager**: pnpm (efficient monorepo)
+- **Deployment**: Vercel (zero-config)
 
-## 📋 Available Scripts
-
-### Frontend (artifacts/hindi-bill)
+## 📋 Available Commands
 
 ```bash
-pnpm run dev          # Start development server
+# Development
+pnpm run dev          # Start dev server with hot reload
 pnpm run build        # Build for production
-pnpm run build:vercel # Build for Vercel deployment
-pnpm run serve        # Preview production build
-pnpm run typecheck    # Run TypeScript checks
+pnpm run serve        # Preview production build locally
+pnpm run typecheck    # Run TypeScript type checking
+
+# Deployment
+pnpm run build:vercel # Build optimized for Vercel
 ```
-
-### Root (workspace)
-
-```bash
-pnpm install          # Install all dependencies
-pnpm run build        # Build all packages
-pnpm run typecheck    # Type check all packages
-```
-
-## 🎯 Usage
-
-1. **Open the app** in your browser (http://localhost:5173)
-2. **Fill in the form**:
-   - Bill details (number, type, dates)
-   - Work information
-   - Contractor details (with autocomplete)
-   - Financial details
-3. **Preview** the note sheet in real-time
-4. **Generate PDF** by clicking the print button
-5. **Save or print** using your browser's print dialog
 
 ## 🎨 Customization
 
-### Office Name
-Default: "PWD Electric Division, Udaipur"
+### Change Office Name
 
-To change, edit `artifacts/hindi-bill/src/pages/BillForm.tsx`:
+Edit `artifacts/hindi-bill/src/pages/BillForm.tsx`:
+
 ```typescript
-officeName: "Your Office Name Here",
+officeName: "PWD Electric Division, Your City",
 ```
 
-### Contractor List
-Add/edit contractors in the `CONTRACTORS` array in `BillForm.tsx`.
+### Add/Edit Contractors
 
-### Theme Colors
-Modify the Navratri theme in the component styles or Tailwind config.
+Modify the `CONTRACTORS` array in `BillForm.tsx`:
+
+```typescript
+const CONTRACTORS = [
+  { name: "Contractor Name", address: "Address" },
+  // Add more...
+];
+```
+
+### Modify Theme Colors
+
+Update Tailwind classes in component styles or create a custom theme.
 
 ## 🐛 Troubleshooting
 
-### Port Already in Use
+**Port already in use?**
 ```bash
 npx kill-port 5173
-# or
+# or use different port
 PORT=3000 pnpm run dev
 ```
 
-### Dependencies Issues
+**Dependencies issues?**
 ```bash
 rm -rf node_modules pnpm-lock.yaml
 pnpm install
 ```
 
-### TypeScript Errors
+**TypeScript errors?**
 ```bash
 pnpm run typecheck
 ```
 
-See [CODESPACES_SETUP.md](./CODESPACES_SETUP.md#-troubleshooting) for more.
+See [DOCUMENTATION.md](./DOCUMENTATION.md) for detailed troubleshooting.
 
 ## 📚 Documentation
 
-- [📖 Codespaces Setup Guide](./CODESPACES_SETUP.md) - Complete setup walkthrough
-- [📖 Quick Start Guide](./QUICK_START.md) - Fast setup reference
-- [📖 Vercel Deployment Guide](./VERCEL_DEPLOYMENT.md) - Deployment instructions
+- [📖 Complete Documentation](./DOCUMENTATION.md) - Setup, deployment, and troubleshooting
+- [🎥 Video Guide](#-video-guide) - Visual walkthrough (coming soon)
+
+## 🎥 Video Guide
+
+### How to Use the App (3-minute walkthrough)
+
+**Coming Soon!** We're creating a video guide covering:
+1. Opening the app in Codespaces
+2. Filling out the bill form
+3. Using contractor autocomplete
+4. Understanding deviation notes
+5. Generating and saving PDFs
 
 ## 🤝 Contributing
 
+We welcome contributions! Here's how:
+
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes and test thoroughly
+4. Commit: `git commit -m 'Add amazing feature'`
+5. Push: `git push origin feature/amazing-feature`
+6. Open a Pull Request
 
 ## 📄 License
 
-MIT License - feel free to use this project for your needs.
+MIT License - Free to use for personal and commercial projects.
 
 ## 🙏 Acknowledgments
 
-- PWD Rajasthan for the bill format requirements
+- PWD Rajasthan for bill format requirements
 - Navratri festival for the beautiful theme inspiration
-- Open source community for the amazing tools
+- Open source community for amazing tools
 
 ## 📞 Support
 
-- 📧 Create an issue on GitHub
-- 💬 Check existing issues for solutions
-- 📖 Read the documentation guides
+- 📧 [Create an issue](https://github.com/CRAJKUMARSINGH/TEMP/issues)
+- 💬 Check [existing issues](https://github.com/CRAJKUMARSINGH/TEMP/issues) for solutions
+- 📖 Read the [documentation](./DOCUMENTATION.md)
+
+## ⭐ Star This Repo!
+
+If you find this project useful, please give it a star! It helps others discover it.
 
 ---
 
-Made with ❤️ for PWD Rajasthan | 🪔 नवरात्रि की शुभकामनाएं
+**Made with ❤️ for PWD Rajasthan** | 🪔 **नवरात्रि की शुभकामनाएं**
+
