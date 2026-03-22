@@ -1,6 +1,6 @@
 [build]
   base    = "artifacts/hindi-bill"
-  command = "cp package.netlify.json package.json && npm install && npm run build:netlify"
+  command = "bash netlify-build.sh"
   publish = "dist"
 
 [[redirects]]
