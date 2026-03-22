@@ -539,7 +539,7 @@ export default function BillForm() {
     ["13. Balance to be done = (11 − 12C)", balanceDisplay],
     ["14. Prorata Progress on the Work", "Evident from para 10 and 12 above."],
     ["15. Date of record Measurement (JEN/AEN)", formatDDMMYYYY(form.dateOfMeasurement)],
-    ["16. Date of Checking & % checked by AEN", checkingDateAEN ? `${formatDDMMYYYY(checkingDateAEN)}, 100%` : "---"],
+    ["16. Date of Checking & % checked by AEN", checkingDateAEN ? formatDDMMYYYY(checkingDateAEN) : "---"],
     ...(form.selectionItemsCheckedEE ? [["17. No. of selection items checked by EE", form.selectionItemsCheckedEE] as [string, string]] : []),
     ...(form.otherInputs ? [["18. Other Inputs", form.otherInputs] as [string, string]] : []),
     ["(A) Is it a Repair / Maintenance Work", form.isRepairMaintenance],
