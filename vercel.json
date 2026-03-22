@@ -1,6 +1,6 @@
 {
-  "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm run build:vercel",
+  "installCommand": "cd artifacts/hindi-bill && cp package.netlify.json package.json && npm install",
+  "buildCommand": "cd artifacts/hindi-bill && npx vite build --config vite.config.vercel.ts",
   "outputDirectory": "artifacts/hindi-bill/dist",
   "framework": null,
   "github": { "silent": true },

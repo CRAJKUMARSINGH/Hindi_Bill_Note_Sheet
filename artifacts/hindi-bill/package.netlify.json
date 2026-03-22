@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:netlify": "vite build --config vite.config.netlify.ts"
+    "build:netlify": "vite build --config vite.config.netlify.ts",
+    "build:vercel": "vite build --config vite.config.vercel.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
