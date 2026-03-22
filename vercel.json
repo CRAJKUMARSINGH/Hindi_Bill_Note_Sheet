@@ -1,15 +1,8 @@
 {
-  "buildCommand": "pnpm install --no-frozen-lockfile && cd artifacts/hindi-bill && pnpm run build:vercel",
+  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm run build:vercel",
   "outputDirectory": "artifacts/hindi-bill/dist",
-  "installCommand": "echo 'Skipping root install'",
+  "installCommand": "echo skip",
   "framework": null,
-  "github": {
-    "silent": true
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "github": { "silent": true },
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

@@ -1,9 +1,17 @@
 [build]
-  base    = ""
-  command = "bash artifacts/hindi-bill/netlify-build.sh"
+  base    = "."
   publish = "artifacts/hindi-bill/dist"
+  command = "corepack enable && corepack prepare pnpm@9 --activate && cd artifacts/hindi-bill && cp package.netlify.json package.json && pnpm install --no-frozen-lockfile && pnpm run build:netlify"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
