@@ -1,0 +1,9 @@
+[build]
+  base    = "artifacts/hindi-bill"
+  command = "npm install && npx vite build --config vite.config.netlify.ts"
+  publish = "artifacts/hindi-bill/dist"
+
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
